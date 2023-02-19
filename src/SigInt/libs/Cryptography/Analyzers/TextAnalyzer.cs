@@ -13,6 +13,7 @@ namespace Cryptography.Analyzers
         {
             CheckNull(s);
             result.TotalCharactersCount = s.Length;
+            result.WordCount = GetWordCount(s);
 
             return result;
         }
@@ -30,7 +31,6 @@ namespace Cryptography.Analyzers
             char nl = Environment.NewLine.ToCharArray().FirstOrDefault();
             for (int i = 0; i < input.Length; i++)
             {
-                Console.WriteLine(input[i]);
                 if (input[i] == ' ' || input[i] == nl || input[i] == '\t')
                 {
                     state = false;

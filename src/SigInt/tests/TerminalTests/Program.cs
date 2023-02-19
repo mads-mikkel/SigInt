@@ -34,12 +34,13 @@ namespace TerminalTests
                 }
             }*/
 
-            /* var bytes = File.ReadAllBytes(@"C:\Users\mara\source\repos\aspit\Aspit.Planner.Gui.Wpf.App\bin\Release\aspitplanner.exe");
-             Printer.Print(bytes, Encoding.UTF8);*/
-
+            var file = @"C:\data\bytetest.txt";
             TextAnalyzer analyzer = new TextAnalyzer();
-            Console.WriteLine(analyzer.GetWordCount(@"One two     three
-four    five "));
+            var result = analyzer.RunStatisticalAnalysis(File.ReadAllText(file));
+            Console.WriteLine(result);
+             var bytes = File.ReadAllBytes(file);
+             Printer.Print(bytes, Encoding.UTF8);
+            
         }
     }
 }
