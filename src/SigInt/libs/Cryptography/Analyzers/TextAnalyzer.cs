@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+//using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -7,11 +8,12 @@ namespace Cryptography.Analyzers
 {
     public class TextAnalyzer
     {
-        private TextAnalyzerResult result = new();
+        private TextAnalyzerResult result;
 
         public TextAnalyzerResult RunStatisticalAnalysis(string s)
         {
             CheckNull(s);
+            result = new TextAnalyzerResult(GetWordOccurences(s));
             result.TotalCharactersCount = s.Length;
             result.WordCount = GetWordCount(s);
 
@@ -42,6 +44,30 @@ namespace Cryptography.Analyzers
                 }
             }
             return wordCount;
+        }
+
+        /// <summary>
+        /// Gets a sorted key-value list of word occurences.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public Dictionary<string, int> GetWordOccurences(in string input)
+        {
+            Dictionary<string, int> freq = new();
+            string[] words = input.Split(' ', Environment.NewLine.ToCharArray().FirstOrDefault());
+            foreach (string word in words)
+            {
+                if (freq.ContainsKey(word))
+                {
+                    freq[word]++;
+                }
+                else
+                {
+                    freq.Add(word, 1);
+                }
+            }
+            IOrderedEnumerable<KeyValuePair<string, int>> sortedDictionary = freq.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key);
+            return new Dictionary<string, int>(sortedDictionary);
         }
 
         public int GetMinimumWordLength(string s)

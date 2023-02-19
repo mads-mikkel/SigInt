@@ -33,13 +33,16 @@ namespace TerminalTests
                     Console.Write(hex + " ");
                 }
             }*/
-
+            /*
             var file = @"C:\data\bytetest.txt";
             TextAnalyzer analyzer = new TextAnalyzer();
             var result = analyzer.RunStatisticalAnalysis(File.ReadAllText(file));
             Console.WriteLine(result);
              var bytes = File.ReadAllBytes(file);
-             Printer.Print(bytes, Encoding.UTF8);
+             Printer.Print(bytes, Encoding.UTF8);*/
+            TextAnalyzer analyzer = new();
+            string s = "fire fem syv seks et tre fem syv fire fem syv seks fem syv tre to fire seks fem syv seks fire to syv tre syv seks";
+            Console.WriteLine(analyzer.RunStatisticalAnalysis(s));
             
         }
     }
