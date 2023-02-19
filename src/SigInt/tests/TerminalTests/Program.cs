@@ -1,4 +1,5 @@
 ﻿using Cryptography;
+using Cryptography.Tools;
 
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace TerminalTests
     {
         static void Main(string[] args)
         {
-            CeaserCipher cc = new();
+            /*CeaserCipher cc = new();
             string m = "novemtresterminusunusnovemunusterminusunusquinquesexterminusunusnullaquinque".ToUpper();
             string c = cc.Encrypt(m, 13);
 
@@ -29,7 +30,10 @@ namespace TerminalTests
                     var hex = BitConverter.ToString(b).Replace("-", "");
                     Console.Write(hex + " ");
                 }
-            }
+            }*/
+
+            var bytes = File.ReadAllBytes(@"C:\Users\mara\source\repos\aspit\Aspit.Planner.Gui.Wpf.App\bin\Release\aspitplanner.exe");
+            Printer.Print(bytes, Encoding.UTF8);
         }
     }
 }
