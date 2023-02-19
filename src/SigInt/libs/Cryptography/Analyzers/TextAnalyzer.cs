@@ -12,20 +12,36 @@ namespace Cryptography.Analyzers
         public TextAnalyzerResult RunStatisticalAnalysis(string s)
         {
             CheckNull(s);
-            result.TotalCharactersCount  = s.Length;
+            result.TotalCharactersCount = s.Length;
 
             return result;
         }
 
-        public int GetWordCount(string s)
+        public int GetWordCount(in string input)
         {
-            CheckNull(s);
-            if(CheckEmpty(s))
+            CheckNull(input);
+            if (CheckEmpty(input))
                 return 0;
-            if(IsWhiteSpaceOnly(s)) 
+            if (IsWhiteSpaceOnly(input))
                 return 0;
 
-            return s.Count(c => c == ' ') + 1;            
+            bool state = false;
+            int wordCount = 0;
+            char nl = Environment.NewLine.ToCharArray().FirstOrDefault();
+            for (int i = 0; i < input.Length; i++)
+            {
+                Console.WriteLine(input[i]);
+                if (input[i] == ' ' || input[i] == nl || input[i] == '\t')
+                {
+                    state = false;
+                }
+                else if (!state)
+                {
+                    state = true;
+                    wordCount++;
+                }
+            }
+            return wordCount;
         }
 
         public int GetMinimumWordLength(string s)
@@ -34,7 +50,7 @@ namespace Cryptography.Analyzers
             string[] words = s.Split(' ');
             foreach (string word in words)
             {
-                if(word.Length < min)
+                if (word.Length < min)
                 {
                     min = word.Length;
                 }

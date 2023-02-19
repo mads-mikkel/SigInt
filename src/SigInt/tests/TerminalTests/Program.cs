@@ -1,7 +1,9 @@
 ﻿using Cryptography;
+using Cryptography.Analyzers;
 using Cryptography.Tools;
 
 using System.Text;
+using System.Threading;
 
 namespace TerminalTests
 {
@@ -32,8 +34,12 @@ namespace TerminalTests
                 }
             }*/
 
-            var bytes = File.ReadAllBytes(@"C:\Users\mara\source\repos\aspit\Aspit.Planner.Gui.Wpf.App\bin\Release\aspitplanner.exe");
-            Printer.Print(bytes, Encoding.UTF8);
+            /* var bytes = File.ReadAllBytes(@"C:\Users\mara\source\repos\aspit\Aspit.Planner.Gui.Wpf.App\bin\Release\aspitplanner.exe");
+             Printer.Print(bytes, Encoding.UTF8);*/
+
+            TextAnalyzer analyzer = new TextAnalyzer();
+            Console.WriteLine(analyzer.GetWordCount(@"One two     three
+four    five "));
         }
     }
 }
