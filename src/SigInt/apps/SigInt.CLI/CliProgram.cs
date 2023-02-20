@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.CommandLine;
 
 using static System.Console;
 
@@ -15,16 +16,17 @@ namespace SigInt.CLI
 
         private static void DisplayWelcome()
         {
-            OperatingSystem os = Environment.OSVersion;
-            Version ver = os.Version;
+            var versionString = Assembly.GetEntryAssembly()?
+                                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+                                .InformationalVersion
+                                .ToString();
 
-            Version sigIntVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            string sigIntVer = $"{sigIntVersion.Major}.{sigIntVersion.Minor}.{sigIntVersion.Build}";
             string copyRight = "© 2023 Mads Mikkel Rasmussen. All rights reserved.";
-            string message =
-                $"SigInt - Signal Intelligence ver. {sigIntVer}\n" +
-                $"{copyRight}";
             
+            string message =
+                $"SigInt - Signal Intelligence ver. {versionString}\n" +
+                $"{copyRight}";
+
             WriteLine(message);
         }
     }
